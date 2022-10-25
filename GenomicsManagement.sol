@@ -410,6 +410,7 @@ contract GenomicsDataManagement is ReentrancyGuard{
         //require(Raw.isPendingSequencing == true, "This Raw genomic data is not pending sequencing");
         require(CommittedsequencingCenter[Raw.RawNFTId][_requestnumber] == address(0), "A sequencing center is already committed to sequencing this raw genomic data");
         require(_RawNFTId > 0 && _RawNFTId <= RawNFTsCount, "The requested NFT doesn't exist");
+
         CommittedsequencingCenter[Raw.RawNFTId][_requestnumber] = payable(msg.sender); //The sequencing center calling this function becomes accountable for this NFT
         
         emit SequencingCenterCommitted(Raw.RawNFTId, address(Raw.nft),  Raw.tokenId,  Raw.dataOwner, msg.sender);
@@ -690,3 +691,7 @@ contract GenomicsDataManagement is ReentrancyGuard{
 //This file should be the latest one but double-check with the one on PC
 
 //Modifications so far: 1. pay for sequencing function  2. commit to sequencing
+
+// Committing to sequencing should check that the request number is valid
+
+// ipfs://bafybeigvgzoolc3drupxhlevdp2ugqcrbcsqfmcek2zxiw5wctk3xjpjwy
